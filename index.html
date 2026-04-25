@@ -306,7 +306,14 @@ section { padding: 5rem 2.5rem; }
   position: relative;
   box-shadow: 0 24px 80px rgba(0,0,0,0.12);
   animation: modalIn 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  max-height: calc(100vh - 3rem);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
+@media (max-width: 480px) {
+  .modal { padding: 1.5rem; border-radius: 16px; }
+}
+.qr-wrap img { width: 200px; height: 200px; display: block; object-fit: contain; }
 .modal-close {
   position: absolute; top: 1rem; right: 1rem;
   background: var(--bg-soft); border: none;
@@ -483,12 +490,12 @@ footer {
     <p>Projects built with Rhino, Grasshopper, and computational design.</p>
   </div>
   <div class="projects-grid">
-    <div class="project-card fade-in"><div class="project-thumb"><div class="img-ph"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>your image here</div></div><div class="project-info"><h3>Topographic surface analysis</h3><div class="p-tags"><span>terrain</span><span>analysis</span><span>grasshopper</span></div></div></div>
-    <div class="project-card fade-in"><div class="project-thumb"><div class="img-ph"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>your image here</div></div><div class="project-info"><h3>Contour heatmap visualization</h3><div class="p-tags"><span>data</span><span>visualization</span><span>color map</span></div></div></div>
-    <div class="project-card fade-in"><div class="project-thumb"><div class="img-ph"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>your image here</div></div><div class="project-info"><h3>Radial pattern structure</h3><div class="p-tags"><span>geometry</span><span>pattern</span><span>radial</span></div></div></div>
-    <div class="project-card fade-in"><div class="project-thumb"><div class="img-ph"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>your image here</div></div><div class="project-info"><h3>Organic pavilion design</h3><div class="p-tags"><span>architecture</span><span>render</span><span>nature</span></div></div></div>
-    <div class="project-card fade-in"><div class="project-thumb"><div class="img-ph"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>your image here</div></div><div class="project-info"><h3>Voronoi canopy structure</h3><div class="p-tags"><span>voronoi</span><span>fabrication</span></div></div></div>
-    <div class="project-card fade-in"><div class="project-thumb"><div class="img-ph"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>your image here</div></div><div class="project-info"><h3>Grasshopper node tutorial</h3><div class="p-tags"><span>tutorial</span><span>nodes</span><span>education</span></div></div></div>
+    <div class="project-card fade-in"><div class="project-thumb"><img src="image/topographic-surface-analysis.png" alt="Topographic surface analysis" loading="lazy"></div><div class="project-info"><h3>Topographic surface analysis</h3><div class="p-tags"><span>terrain</span><span>analysis</span><span>grasshopper</span></div></div></div>
+    <div class="project-card fade-in"><div class="project-thumb"><img src="image/contour-heatmap-visualization.png" alt="Contour heatmap visualization" loading="lazy"></div><div class="project-info"><h3>Contour heatmap visualization</h3><div class="p-tags"><span>data</span><span>visualization</span><span>color map</span></div></div></div>
+    <div class="project-card fade-in"><div class="project-thumb"><img src="image/radial-pattern-structure.png" alt="Radial pattern structure" loading="lazy"></div><div class="project-info"><h3>Radial pattern structure</h3><div class="p-tags"><span>geometry</span><span>pattern</span><span>radial</span></div></div></div>
+    <div class="project-card fade-in"><div class="project-thumb"><img src="image/organic-pavilion-design.png" alt="Organic pavilion design" loading="lazy"></div><div class="project-info"><h3>Organic pavilion design</h3><div class="p-tags"><span>architecture</span><span>render</span><span>nature</span></div></div></div>
+    <div class="project-card fade-in"><div class="project-thumb"><img src="image/voronoi-canopy-structure.png" alt="Voronoi canopy structure" loading="lazy"></div><div class="project-info"><h3>Voronoi canopy structure</h3><div class="p-tags"><span>voronoi</span><span>fabrication</span></div></div></div>
+    <div class="project-card fade-in"><div class="project-thumb"><img src="image/grasshopper-node-tutorial.png" alt="Grasshopper node tutorial" loading="lazy"></div><div class="project-info"><h3>Grasshopper node tutorial</h3><div class="p-tags"><span>tutorial</span><span>nodes</span><span>education</span></div></div></div>
   </div>
 </section>
 
@@ -559,13 +566,13 @@ footer {
 
     <div class="pay-box">
       <div class="pay-box-label">Pay with PromptPay</div>
-      <div class="qr-wrap"><canvas id="ppQr"></canvas></div>
+      <div class="qr-wrap"><img src="image/qr-payment.jpeg" alt="PromptPay QR — MR. YUTTANA TONGKRAJANG"></div>
       <div class="pay-meta">
         <div><span>Account name</span><strong>MR. YUTTANA TONGKRAJANG</strong></div>
         <div><span>PromptPay ID</span><strong>064-028-0287</strong></div>
         <div class="pay-amt"><span>Amount</span><strong id="ppAmt"></strong></div>
       </div>
-      <div class="pay-hint">Scan with any Thai bank app &mdash; amount is pre-filled</div>
+      <div class="pay-hint">Scan with any Thai bank app and enter the amount above</div>
     </div>
 
     <div class="fg"><label>Full name</label><input type="text" placeholder="Your name" id="iName"></div>
@@ -578,7 +585,6 @@ footer {
   </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.3/qrcode.min.js"></script>
 <script>
 /* ======= VORONOI on HERO — follows mouse ======= */
 (function() {
@@ -838,7 +844,6 @@ document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
 
 /* ======= PAYMENT ======= */
 let sC = '', sP = 0;
-const PP_PHONE = '0640280287';
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/myklowwp';
 
 function openPay(c, p) {
@@ -849,47 +854,8 @@ function openPay(c, p) {
   document.getElementById('ppAmt').textContent = priceStr;
   document.getElementById('payModal').classList.add('active');
   document.body.style.overflow = 'hidden';
-  try { renderPromptPay(p); }
-  catch (err) { console.error('QR render failed:', err); }
 }
 function closePay() { document.getElementById('payModal').classList.remove('active'); document.body.style.overflow = ''; }
-
-function promptpayPayload(phone, amount) {
-  const sanitized = phone.replace(/\D/g, '').replace(/^0/, '');
-  const target = '0066' + sanitized;
-  const tlv = (id, v) => id + String(v.length).padStart(2, '0') + v;
-  const merchant = tlv('00', 'A000000677010111') + tlv('01', target);
-  let data =
-    tlv('00', '01') +
-    tlv('01', '12') +
-    tlv('29', merchant) +
-    tlv('53', '764') +
-    tlv('54', amount.toFixed(2)) +
-    tlv('58', 'TH');
-  data += '6304';
-  let crc = 0xFFFF;
-  for (let i = 0; i < data.length; i++) {
-    crc ^= data.charCodeAt(i) << 8;
-    for (let j = 0; j < 8; j++) crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) & 0xFFFF : (crc << 1) & 0xFFFF;
-  }
-  return data + crc.toString(16).toUpperCase().padStart(4, '0');
-}
-
-function renderPromptPay(amount) {
-  const canvas = document.getElementById('ppQr');
-  if (typeof QRCode === 'undefined') {
-    console.warn('QRCode library not loaded — showing text fallback');
-    const ctx = canvas.getContext('2d');
-    canvas.width = 200; canvas.height = 200;
-    ctx.fillStyle = '#f5f5f5'; ctx.fillRect(0,0,200,200);
-    ctx.fillStyle = '#111'; ctx.font = '12px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('PromptPay: 064-028-0287', 100, 95);
-    ctx.fillText('Amount: ฿' + amount.toLocaleString(), 100, 115);
-    return;
-  }
-  const payload = promptpayPayload(PP_PHONE, amount);
-  QRCode.toCanvas(canvas, payload, { width: 200, margin: 1, color: { dark: '#111', light: '#fff' } });
-}
 
 async function submitPay() {
   const n = document.getElementById('iName').value.trim();
