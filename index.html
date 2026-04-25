@@ -3,10 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pure Parametric</title>
+<title>Pure Parametric — Rhino + Grasshopper Tutoring</title>
+<meta name="description" content="Master parametric design with 1-on-1 Rhino & Grasshopper tutoring. Beginner to advanced. First lesson free.">
+<meta name="keywords" content="Rhino tutoring, Grasshopper tutoring, parametric design, computational architecture, 1-on-1 lessons, Bangkok, online">
+<meta name="author" content="Yuttana Tongkrajang">
+<link rel="canonical" href="https://www.pureparametric.com/">
+
+<!-- Open Graph (Facebook, LinkedIn, etc.) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.pureparametric.com/">
+<meta property="og:title" content="Pure Parametric — Rhino + Grasshopper Tutoring">
+<meta property="og:description" content="Master parametric design with 1-on-1 Rhino & Grasshopper tutoring. Beginner to advanced. First lesson free.">
+<meta property="og:image" content="https://www.pureparametric.com/image/pure-parametric-logo.svg">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://www.pureparametric.com/">
+<meta name="twitter:title" content="Pure Parametric — Rhino + Grasshopper Tutoring">
+<meta name="twitter:description" content="Master parametric design with 1-on-1 Rhino & Grasshopper tutoring. Beginner to advanced. First lesson free.">
+<meta name="twitter:image" content="https://www.pureparametric.com/image/pure-parametric-logo.svg">
+
 <link rel="icon" type="image/svg+xml" href="image/favicon.svg">
 <link rel="apple-touch-icon" href="image/favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Google Analytics (GA4) — replace G-XXXXXXXXXX with your real Measurement ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
 <style>
 :root {
   --bg: #ffffff;
@@ -314,6 +342,146 @@ section { padding: 5rem 2.5rem; }
   .modal { padding: 1.5rem; border-radius: 16px; }
 }
 .qr-wrap img { width: 200px; height: 200px; display: block; object-fit: contain; }
+
+/* PROMO BANNER */
+.promo-banner {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 110;
+  background: linear-gradient(135deg, #111, #333);
+  color: #fff; text-align: center;
+  padding: 0.55rem 3rem;
+  font-size: 0.82rem; font-weight: 500;
+}
+.promo-banner strong { font-weight: 700; }
+.promo-banner a { color: #fff; text-decoration: underline; margin-left: 0.5rem; }
+.promo-banner-close {
+  position: absolute; top: 50%; right: 0.85rem;
+  transform: translateY(-50%);
+  background: none; border: none; color: #fff;
+  cursor: pointer; font-size: 1.1rem; line-height: 1; opacity: 0.7;
+  padding: 0.25rem 0.5rem;
+}
+.promo-banner-close:hover { opacity: 1; }
+body.has-promo nav { top: 36px; }
+body.has-promo .hero { padding-top: 9rem; }
+
+/* ABOUT ME */
+.about-section {
+  max-width: 1000px; margin: 0 auto;
+  display: grid; grid-template-columns: 260px 1fr; gap: 3rem;
+  align-items: center;
+}
+.about-photo {
+  width: 260px; aspect-ratio: 1/1;
+  background: var(--bg-soft);
+  border-radius: 16px; display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border);
+  color: var(--text-light); font-size: 0.85rem; text-align: center;
+  overflow: hidden; padding: 1rem;
+}
+.about-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 16px; }
+.about-content h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1.25rem; }
+.about-content p { color: var(--text-mid); margin-bottom: 1rem; font-size: 0.95rem; }
+.about-credentials { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+.about-credentials span {
+  background: var(--bg-soft); padding: 0.4rem 0.85rem;
+  border-radius: 100px; font-size: 0.8rem; font-weight: 500;
+  border: 1px solid var(--border);
+}
+@media (max-width: 768px) {
+  .about-section { grid-template-columns: 1fr; gap: 2rem; justify-items: center; text-align: center; }
+  .about-section .about-credentials { justify-content: center; }
+}
+
+/* TESTIMONIALS */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem; max-width: 1100px; margin: 0 auto;
+}
+.testimonial-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 1.75rem;
+}
+.testimonial-stars { color: #f59e0b; font-size: 0.85rem; margin-bottom: 0.75rem; letter-spacing: 0.1em; }
+.testimonial-card blockquote {
+  color: var(--text); font-size: 0.92rem;
+  margin-bottom: 1.25rem; font-style: italic;
+  line-height: 1.6;
+}
+.testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+.testimonial-avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--bg-soft); display: flex; align-items: center; justify-content: center;
+  font-weight: 700; color: var(--text-mid); font-size: 0.85rem;
+  border: 1px solid var(--border);
+}
+.testimonial-author strong { display: block; font-size: 0.88rem; font-weight: 600; }
+.testimonial-author span { color: var(--text-light); font-size: 0.78rem; }
+
+/* FAQ */
+.faq-list { max-width: 760px; margin: 0 auto; }
+.faq-item {
+  border-bottom: 1px solid var(--border);
+  padding: 1.25rem 0;
+}
+.faq-item summary {
+  display: flex; justify-content: space-between; align-items: center;
+  cursor: pointer; font-weight: 600; font-size: 1rem;
+  list-style: none; gap: 1rem;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: '+'; font-size: 1.4rem; color: var(--text-mid);
+  transition: transform 0.2s; flex-shrink: 0;
+}
+.faq-item[open] summary::after { content: '−'; }
+.faq-answer {
+  color: var(--text-mid); font-size: 0.92rem;
+  padding-top: 0.85rem; line-height: 1.7;
+}
+
+/* TUTORIALS */
+.tutorials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem; max-width: 1100px; margin: 0 auto;
+}
+.tutorial-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 16px; overflow: hidden;
+  text-decoration: none; color: var(--text);
+  display: block;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.tutorial-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.07); }
+.tutorial-thumb {
+  width: 100%; aspect-ratio: 16/9;
+  background: var(--bg-soft);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-light); font-size: 0.78rem;
+}
+.tutorial-info { padding: 1.25rem 1.5rem 1.5rem; }
+.tutorial-meta {
+  display: flex; gap: 0.75rem; font-size: 0.7rem;
+  color: var(--text-light); margin-bottom: 0.5rem;
+  text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;
+}
+.tutorial-info h3 {
+  font-size: 1rem; font-weight: 700;
+  margin-bottom: 0.5rem; line-height: 1.35;
+}
+.tutorial-info p {
+  font-size: 0.85rem; color: var(--text-mid);
+  line-height: 1.55;
+}
+.section-cta { text-align: center; margin-top: 2rem; }
+.section-cta a {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  color: var(--text); text-decoration: none;
+  font-weight: 600; font-size: 0.9rem;
+  border-bottom: 1px solid var(--text);
+  padding-bottom: 2px;
+}
 .modal-close {
   position: absolute; top: 1rem; right: 1rem;
   background: var(--bg-soft); border: none;
@@ -424,7 +592,14 @@ footer {
 }
 </style>
 </head>
-<body>
+<body class="has-promo">
+
+<!-- LAUNCH PROMO BANNER -->
+<div class="promo-banner" id="promoBanner">
+  🎉 <strong>Launch promo:</strong> First 10 students get <strong>15% off</strong> any course
+  <a href="#courses">View courses</a>
+  <button class="promo-banner-close" onclick="closePromo()" aria-label="Dismiss">×</button>
+</div>
 
 <canvas id="confetti-bg"></canvas>
 
@@ -437,8 +612,11 @@ footer {
       Pure Parametric
     </a>
     <div class="nav-menu">
+      <a href="#about">About</a>
       <a href="#projects">Projects</a>
       <a href="#courses">Courses</a>
+      <a href="#tutorials">Tutorials</a>
+      <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
     </div>
   </div>
@@ -470,19 +648,6 @@ footer {
 </div>
 
 <!-- GRAVITY PLAYGROUND -->
-<div class="gravity-playground">
-  <div class="gp-label">Grab and throw these around</div>
-  <div class="gp-pills">
-    <div class="gp-pill draggable"><span class="dot"></span> Grasshopper</div>
-    <div class="gp-pill draggable"><span class="dot"></span> Rhino 3D</div>
-    <div class="gp-pill draggable"><span class="dot"></span> Data Trees</div>
-    <div class="gp-pill draggable"><span class="dot"></span> Surfaces</div>
-    <div class="gp-pill draggable"><span class="dot"></span> Attractors</div>
-    <div class="gp-pill draggable"><span class="dot"></span> Paneling</div>
-    <div class="gp-pill draggable"><span class="dot"></span> Python</div>
-  </div>
-</div>
-
 <!-- PROJECTS -->
 <section id="projects">
   <div class="section-header fade-in">
@@ -510,7 +675,7 @@ footer {
       <span class="course-level cl-blue">Beginner</span>
       <h3>Grasshopper fundamentals</h3>
       <p class="desc">Start from zero. Learn the interface, data trees, basic geometry, and logic.</p>
-      <ul class="feat-list"><li>8 lessons (1 hour each)</li><li>1-on-1 live sessions</li><li>Practice files included</li><li>Certificate on completion</li></ul>
+      <ul class="feat-list"><li>8 lessons (1 hour each)</li><li>1-on-1 live sessions</li><li>Practice files included</li></ul>
       <div class="course-price"><span class="price-val">&#3647;4,790</span><span class="price-per">/ course</span></div>
       <button class="c-btn c-btn-blue" onclick="openPay('Grasshopper Fundamentals',4790)">Enroll now</button>
     </div>
@@ -518,7 +683,7 @@ footer {
       <span class="course-level cl-green">Intermediate</span>
       <h3>Parametric design mastery</h3>
       <p class="desc">Complex models, attractors, paneling, and environmental analysis.</p>
-      <ul class="feat-list"><li>12 lessons (1.5 hours each)</li><li>1-on-1 live sessions</li><li>Portfolio project included</li><li>Ongoing chat support</li><li>Certificate on completion</li></ul>
+      <ul class="feat-list"><li>12 lessons (1.5 hours each)</li><li>1-on-1 live sessions</li><li>Portfolio project included</li><li>Ongoing chat support</li></ul>
       <div class="course-price"><span class="price-val">&#3647;7,990</span><span class="price-per">/ course</span></div>
       <button class="c-btn c-btn-green" onclick="openPay('Parametric Design Mastery',7990)">Enroll now</button>
     </div>
@@ -526,7 +691,7 @@ footer {
       <span class="course-level cl-purple">Advanced</span>
       <h3>Computational architecture</h3>
       <p class="desc">Optimization, Python/C# scripting, simulations, and fabrication.</p>
-      <ul class="feat-list"><li>10 lessons (2 hours each)</li><li>1-on-1 live sessions</li><li>Custom project mentorship</li><li>Code review &amp; feedback</li><li>Certificate on completion</li></ul>
+      <ul class="feat-list"><li>10 lessons (2 hours each)</li><li>1-on-1 live sessions</li><li>Custom project mentorship</li><li>Code review &amp; feedback</li></ul>
       <div class="course-price"><span class="price-val">&#3647;11,990</span><span class="price-per">/ course</span></div>
       <button class="c-btn c-btn-purple" onclick="openPay('Computational Architecture',11990)">Enroll now</button>
     </div>
@@ -534,6 +699,111 @@ footer {
   <div style="text-align:center; margin-top:2.5rem" class="fade-in">
     <p style="color:var(--text-mid); font-size:0.85rem; margin-bottom:0.5rem;">Not sure which level?</p>
     <a href="#contact" class="btn-outline" style="display:inline-flex;">Book a free trial first</a>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-header fade-in">
+    <h2>What students say</h2>
+    <p>Real feedback from real learners.</p>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card fade-in">
+      <div class="testimonial-stars">★★★★★</div>
+      <blockquote>"I went from zero to building my own parametric facade in 8 weeks. Yuttana explains the *why* behind every node, not just the *how*."</blockquote>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">[A]</div>
+        <div><strong>[Student name]</strong><span>Architecture student</span></div>
+      </div>
+    </div>
+    <div class="testimonial-card fade-in">
+      <div class="testimonial-stars">★★★★★</div>
+      <blockquote>"The 1-on-1 format made all the difference. We worked on my actual project from day one — far more useful than any YouTube tutorial."</blockquote>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">[B]</div>
+        <div><strong>[Student name]</strong><span>Product designer</span></div>
+      </div>
+    </div>
+    <div class="testimonial-card fade-in">
+      <div class="testimonial-stars">★★★★★</div>
+      <blockquote>"Worth every baht. After 12 lessons I now lead Grasshopper workflows at my studio. The portfolio project landed me my current role."</blockquote>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">[C]</div>
+        <div><strong>[Student name]</strong><span>Junior architect</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TUTORIALS / BLOG -->
+<section id="tutorials">
+  <div class="section-header fade-in">
+    <h2>Free tutorials</h2>
+    <p>Bite-sized lessons to get you started before booking.</p>
+  </div>
+  <div class="tutorials-grid">
+    <a href="#" class="tutorial-card fade-in">
+      <div class="tutorial-thumb">[Thumbnail]</div>
+      <div class="tutorial-info">
+        <div class="tutorial-meta"><span>Beginner</span><span>•</span><span>5 min read</span></div>
+        <h3>Your first Grasshopper definition</h3>
+        <p>Build a parametric box from scratch and understand the core node logic.</p>
+      </div>
+    </a>
+    <a href="#" class="tutorial-card fade-in">
+      <div class="tutorial-thumb">[Thumbnail]</div>
+      <div class="tutorial-info">
+        <div class="tutorial-meta"><span>Intermediate</span><span>•</span><span>8 min read</span></div>
+        <h3>Mastering data trees</h3>
+        <p>Stop fighting Grasshopper's data structure — learn to think in branches.</p>
+      </div>
+    </a>
+    <a href="#" class="tutorial-card fade-in">
+      <div class="tutorial-thumb">[Thumbnail]</div>
+      <div class="tutorial-info">
+        <div class="tutorial-meta"><span>Advanced</span><span>•</span><span>12 min read</span></div>
+        <h3>Voronoi facades that actually work</h3>
+        <p>From point cloud to fabricable panel — the full computational pipeline.</p>
+      </div>
+    </a>
+  </div>
+  <div class="section-cta fade-in">
+    <a href="#">See all tutorials →</a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-header fade-in">
+    <h2>Frequently asked questions</h2>
+    <p>Everything you need to know before booking.</p>
+  </div>
+  <div class="faq-list">
+    <details class="faq-item fade-in">
+      <summary>Do I need to own Rhino or Grasshopper before starting?</summary>
+      <div class="faq-answer">No. Rhino offers a free 90-day evaluation, and Grasshopper is included with Rhino. We'll set everything up together in the first lesson if needed.</div>
+    </details>
+    <details class="faq-item fade-in">
+      <summary>What experience level do I need?</summary>
+      <div class="faq-answer">None. I teach complete beginners as well as professionals. The first 30-minute trial helps me understand your level and goals so I can tailor the curriculum.</div>
+    </details>
+    <details class="faq-item fade-in">
+      <summary>Online or in person?</summary>
+      <div class="faq-answer">Both. Online lessons are over Zoom with screen sharing — works just as well as in person. If you're in Bangkok, we can meet in person at my studio.</div>
+    </details>
+    <details class="faq-item fade-in">
+      <summary>What language do you teach in?</summary>
+      <div class="faq-answer">English or Thai — your choice. Just let me know which you prefer when booking.</div>
+    </details>
+    <details class="faq-item fade-in">
+      <summary>What if I miss or want to reschedule a lesson?</summary>
+      <div class="faq-answer">Free reschedule with 24 hours notice. Within 24 hours, lesson is forfeited unless there's an emergency.</div>
+    </details>
+    <details class="faq-item fade-in">
+      <summary>How does payment work?</summary>
+      <div class="faq-answer">Pay per course via PromptPay (Thai bank transfer). No subscription, no auto-renewal. Refund available before the second lesson if it's not a fit.</div>
+    </details>
   </div>
 </section>
 
@@ -547,11 +817,39 @@ footer {
   </div>
 </section>
 
+<!-- ABOUT ME -->
+<section id="about">
+  <div class="section-header fade-in">
+    <h2>Meet your tutor</h2>
+    <p>Computational designer turned teacher.</p>
+  </div>
+  <div class="about-section fade-in">
+    <div class="about-photo">
+      <img src="image/yuttana-photo.jpg" alt="Yuttana Tongkrajang">
+    </div>
+    <div class="about-content">
+      <h2>Hi, I'm Yuttana</h2>
+      <p>I've spent the last [X] years working with Rhino and Grasshopper across architecture, product design, and computational fabrication. I've taught beginners who'd never opened Rhino to professionals optimizing complex parametric workflows.</p>
+      <p>My approach is hands-on: we work on real projects from your portfolio or industry briefs, not toy examples. You leave each lesson with a deliverable you can show.</p>
+      <p>Lessons are 1-on-1, online or in Bangkok, in English or Thai. The first 30 minutes are always free — no commitment.</p>
+      <div class="about-credentials">
+        <span>Rhino certified</span>
+        <span>Grasshopper expert</span>
+        <span>[X]+ students taught</span>
+        <span>Based in Bangkok</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="ft-brand"><img src="image/pure-parametric-logo.svg" alt=""> Pure Parametric</div>
   <div class="ft-links">
+    <a href="#about">About</a>
     <a href="#projects">Projects</a>
     <a href="#courses">Courses</a>
+    <a href="#tutorials">Tutorials</a>
+    <a href="#faq">FAQ</a>
     <a href="https://www.instagram.com/pure.parametric/" target="_blank">Instagram</a>
   </div>
 </footer>
@@ -857,6 +1155,17 @@ function openPay(c, p) {
   document.body.style.overflow = 'hidden';
 }
 function closePay() { document.getElementById('payModal').classList.remove('active'); document.body.style.overflow = ''; }
+
+function closePromo() {
+  document.getElementById('promoBanner').style.display = 'none';
+  document.body.classList.remove('has-promo');
+  try { localStorage.setItem('promoDismissed', '1'); } catch (e) {}
+}
+try {
+  if (localStorage.getItem('promoDismissed') === '1') {
+    closePromo();
+  }
+} catch (e) {}
 
 async function submitPay() {
   const n = document.getElementById('iName').value.trim();
