@@ -354,6 +354,30 @@ section { padding: 5rem 2.5rem; }
 }
 .submit-btn:hover { opacity: 0.85; }
 .sec-note { text-align: center; margin-top: 0.5rem; font-size: 0.68rem; color: var(--text-light); }
+.pay-box {
+  background: var(--bg-soft); border: 1px solid var(--border);
+  border-radius: 14px; padding: 1.25rem; margin-bottom: 1.5rem;
+  text-align: center;
+}
+.pay-box-label {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text-mid); margin-bottom: 0.75rem;
+}
+.qr-wrap {
+  background: #fff; border-radius: 10px; padding: 0.75rem;
+  display: inline-block; margin-bottom: 0.85rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+.qr-wrap canvas { display: block; }
+.pay-meta {
+  font-size: 0.78rem; text-align: left; color: var(--text-mid);
+  display: grid; gap: 0.4rem; margin-bottom: 0.75rem;
+}
+.pay-meta > div { display: flex; justify-content: space-between; align-items: baseline; }
+.pay-meta strong { color: var(--text); font-weight: 600; }
+.pay-meta .pay-amt strong { font-size: 1rem; font-weight: 800; }
+.pay-hint { font-size: 0.7rem; color: var(--text-light); line-height: 1.4; }
+.fg input[type="file"] { padding: 0.55rem 0.85rem; font-size: 0.8rem; }
 
 /* CTA */
 .cta-section { text-align: center; padding: 6rem 2rem; }
@@ -511,8 +535,8 @@ footer {
   <h2>Ready for liftoff?</h2>
   <p>Book a free 30-minute trial. No commitment required.</p>
   <div class="cta-btns">
-    <a href="https://wa.me/66XXXXXXXXX" target="_blank" class="btn-dark">WhatsApp</a>
-    <a href="https://instagram.com/pure.parametric" target="_blank" class="btn-outline">DM on Instagram</a>
+    <a href="https://wa.me/66640280287" target="_blank" class="btn-dark">WhatsApp</a>
+    <a href="https://www.instagram.com/pure.parametric/" target="_blank" class="btn-outline">DM on Instagram</a>
   </div>
 </section>
 
@@ -521,7 +545,7 @@ footer {
   <div class="ft-links">
     <a href="#projects">Projects</a>
     <a href="#courses">Courses</a>
-    <a href="https://instagram.com/pure.parametric" target="_blank">Instagram</a>
+    <a href="https://www.instagram.com/pure.parametric/" target="_blank">Instagram</a>
   </div>
 </footer>
 </div>
@@ -532,21 +556,29 @@ footer {
     <button class="modal-close" onclick="closePay()">&times;</button>
     <h3>Enroll in course</h3>
     <p class="m-sub" id="mName"></p>
+
+    <div class="pay-box">
+      <div class="pay-box-label">Pay with PromptPay</div>
+      <div class="qr-wrap"><canvas id="ppQr"></canvas></div>
+      <div class="pay-meta">
+        <div><span>Account name</span><strong>MR. YUTTANA TONGKRAJANG</strong></div>
+        <div><span>PromptPay ID</span><strong>064-028-0287</strong></div>
+        <div class="pay-amt"><span>Amount</span><strong id="ppAmt"></strong></div>
+      </div>
+      <div class="pay-hint">Scan with any Thai bank app &mdash; amount is pre-filled</div>
+    </div>
+
     <div class="fg"><label>Full name</label><input type="text" placeholder="Your name" id="iName"></div>
     <div class="fg"><label>Email</label><input type="email" placeholder="your@email.com" id="iEmail"></div>
     <div class="fg"><label>Phone / Line ID</label><input type="text" placeholder="Phone or Line ID" id="iPhone"></div>
-    <label style="font-size:0.75rem; font-weight:600; color:var(--text-mid); margin-bottom:0.4rem; display:block;">Payment method</label>
-    <div class="pay-opts">
-      <div class="pay-opt active" onclick="selPay(this,'transfer')"><div class="pay-opt-icon">&#127974;</div>Bank transfer</div>
-      <div class="pay-opt" onclick="selPay(this,'promptpay')"><div class="pay-opt-icon">&#128241;</div>PromptPay</div>
-      <div class="pay-opt" onclick="selPay(this,'card')"><div class="pay-opt-icon">&#128179;</div>Credit card</div>
-    </div>
+
     <div class="total-bar"><span class="total-lbl">Total</span><span class="total-val" id="mPrice"></span></div>
-    <button class="submit-btn" onclick="submitPay()">Confirm &amp; pay</button>
-    <div class="sec-note">&#128274; Secure checkout</div>
+    <button class="submit-btn" onclick="submitPay()">I&rsquo;ve paid &mdash; confirm enrollment</button>
+    <div class="sec-note">&#128274; After paying, send your slip on <a href="https://wa.me/66640280287" target="_blank" style="color:var(--text); text-decoration:underline;">WhatsApp</a> to confirm faster</div>
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 <script>
 /* ======= VORONOI on HERO — follows mouse ======= */
 (function() {
@@ -805,20 +837,54 @@ const obs = new IntersectionObserver(entries => {
 document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
 
 /* ======= PAYMENT ======= */
-let sC = '', sP = 0, sPay = 'transfer';
+let sC = '', sP = 0;
+const PP_PHONE = '0640280287';
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/myklowwp';
+
 function openPay(c, p) {
   sC = c; sP = p;
   document.getElementById('mName').textContent = c;
-  document.getElementById('mPrice').textContent = '\u0E3F' + p.toLocaleString();
+  const priceStr = '\u0E3F' + p.toLocaleString();
+  document.getElementById('mPrice').textContent = priceStr;
+  document.getElementById('ppAmt').textContent = priceStr;
+  renderPromptPay(p);
   document.getElementById('payModal').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
 function closePay() { document.getElementById('payModal').classList.remove('active'); document.body.style.overflow = ''; }
-function selPay(el, m) { document.querySelectorAll('.pay-opt').forEach(e => e.classList.remove('active')); el.classList.add('active'); sPay = m; }
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORMSPREE_ID';
+
+function promptpayPayload(phone, amount) {
+  const sanitized = phone.replace(/\D/g, '').replace(/^0/, '');
+  const target = '0066' + sanitized;
+  const tlv = (id, v) => id + String(v.length).padStart(2, '0') + v;
+  const merchant = tlv('00', 'A000000677010111') + tlv('01', target);
+  let data =
+    tlv('00', '01') +
+    tlv('01', '12') +
+    tlv('29', merchant) +
+    tlv('53', '764') +
+    tlv('54', amount.toFixed(2)) +
+    tlv('58', 'TH');
+  data += '6304';
+  let crc = 0xFFFF;
+  for (let i = 0; i < data.length; i++) {
+    crc ^= data.charCodeAt(i) << 8;
+    for (let j = 0; j < 8; j++) crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) & 0xFFFF : (crc << 1) & 0xFFFF;
+  }
+  return data + crc.toString(16).toUpperCase().padStart(4, '0');
+}
+
+function renderPromptPay(amount) {
+  const canvas = document.getElementById('ppQr');
+  const payload = promptpayPayload(PP_PHONE, amount);
+  QRCode.toCanvas(canvas, payload, { width: 200, margin: 1, color: { dark: '#111', light: '#fff' } });
+}
+
 async function submitPay() {
-  const n = document.getElementById('iName').value, e = document.getElementById('iEmail').value, p = document.getElementById('iPhone').value;
-  if (!n || !e || !p) { alert('Please fill in all fields'); return; }
+  const n = document.getElementById('iName').value.trim();
+  const e = document.getElementById('iEmail').value.trim();
+  const p = document.getElementById('iPhone').value.trim();
+  if (!n || !e || !p) { alert('Please fill in name, email, and phone'); return; }
   const btn = document.querySelector('#payModal .submit-btn');
   const original = btn.textContent;
   btn.disabled = true; btn.textContent = 'Sending...';
@@ -826,13 +892,21 @@ async function submitPay() {
     const res = await fetch(FORMSPREE_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ name: n, email: e, phone: p, course: sC, amount: sP, method: sPay })
+      body: JSON.stringify({ name: n, email: e, phone: p, course: sC, amount: sP, method: 'PromptPay' })
     });
-    if (!res.ok) throw new Error('Request failed');
-    alert('Enrollment request sent!\n\nCourse: ' + sC + '\nAmount: \u0E3F' + sP.toLocaleString() + '\nMethod: ' + sPay + '\n\nYou will receive payment instructions shortly.');
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      console.error('Formspree error:', res.status, data);
+      throw new Error(data.error || ('HTTP ' + res.status));
+    }
+    alert('Thanks, ' + n + '!\n\nWe received your enrollment for "' + sC + '". We\'ll verify your payment and email the schedule within 24h.\n\nFor faster confirmation, send your payment slip to us on WhatsApp.');
+    document.getElementById('iName').value = '';
+    document.getElementById('iEmail').value = '';
+    document.getElementById('iPhone').value = '';
     closePay();
   } catch (err) {
-    alert('Could not send right now. Please message us on WhatsApp or Instagram.');
+    console.error('Submit failed:', err);
+    alert('Could not send: ' + err.message + '\n\nPlease message us on WhatsApp instead: +66 64 028 0287');
   } finally {
     btn.disabled = false; btn.textContent = original;
   }
