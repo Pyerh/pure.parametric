@@ -847,9 +847,10 @@ function openPay(c, p) {
   const priceStr = '\u0E3F' + p.toLocaleString();
   document.getElementById('mPrice').textContent = priceStr;
   document.getElementById('ppAmt').textContent = priceStr;
-  renderPromptPay(p);
   document.getElementById('payModal').classList.add('active');
   document.body.style.overflow = 'hidden';
+  try { renderPromptPay(p); }
+  catch (err) { console.error('QR render failed:', err); }
 }
 function closePay() { document.getElementById('payModal').classList.remove('active'); document.body.style.overflow = ''; }
 
@@ -876,6 +877,16 @@ function promptpayPayload(phone, amount) {
 
 function renderPromptPay(amount) {
   const canvas = document.getElementById('ppQr');
+  if (typeof QRCode === 'undefined') {
+    console.warn('QRCode library not loaded — showing text fallback');
+    const ctx = canvas.getContext('2d');
+    canvas.width = 200; canvas.height = 200;
+    ctx.fillStyle = '#f5f5f5'; ctx.fillRect(0,0,200,200);
+    ctx.fillStyle = '#111'; ctx.font = '12px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('PromptPay: 064-028-0287', 100, 95);
+    ctx.fillText('Amount: ฿' + amount.toLocaleString(), 100, 115);
+    return;
+  }
   const payload = promptpayPayload(PP_PHONE, amount);
   QRCode.toCanvas(canvas, payload, { width: 200, margin: 1, color: { dark: '#111', light: '#fff' } });
 }
