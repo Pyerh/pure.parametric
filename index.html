@@ -511,24 +511,24 @@ footer {
       <h3>Grasshopper fundamentals</h3>
       <p class="desc">Start from zero. Learn the interface, data trees, basic geometry, and logic.</p>
       <ul class="feat-list"><li>8 lessons (1 hour each)</li><li>1-on-1 live sessions</li><li>Practice files included</li><li>Certificate on completion</li></ul>
-      <div class="course-price"><span class="price-val">&#3647;4,800</span><span class="price-per">/ course</span></div>
-      <button class="c-btn c-btn-blue" onclick="openPay('Grasshopper Fundamentals',4800)">Enroll now</button>
+      <div class="course-price"><span class="price-val">&#3647;4,790</span><span class="price-per">/ course</span></div>
+      <button class="c-btn c-btn-blue" onclick="openPay('Grasshopper Fundamentals',4790)">Enroll now</button>
     </div>
     <div class="course-card featured fade-in">
       <span class="course-level cl-green">Intermediate</span>
       <h3>Parametric design mastery</h3>
       <p class="desc">Complex models, attractors, paneling, and environmental analysis.</p>
       <ul class="feat-list"><li>12 lessons (1.5 hours each)</li><li>1-on-1 live sessions</li><li>Portfolio project included</li><li>Ongoing chat support</li><li>Certificate on completion</li></ul>
-      <div class="course-price"><span class="price-val">&#3647;8,500</span><span class="price-per">/ course</span></div>
-      <button class="c-btn c-btn-green" onclick="openPay('Parametric Design Mastery',8500)">Enroll now</button>
+      <div class="course-price"><span class="price-val">&#3647;7,990</span><span class="price-per">/ course</span></div>
+      <button class="c-btn c-btn-green" onclick="openPay('Parametric Design Mastery',7990)">Enroll now</button>
     </div>
     <div class="course-card fade-in">
       <span class="course-level cl-purple">Advanced</span>
       <h3>Computational architecture</h3>
       <p class="desc">Optimization, Python/C# scripting, simulations, and fabrication.</p>
       <ul class="feat-list"><li>10 lessons (2 hours each)</li><li>1-on-1 live sessions</li><li>Custom project mentorship</li><li>Code review &amp; feedback</li><li>Certificate on completion</li></ul>
-      <div class="course-price"><span class="price-val">&#3647;12,000</span><span class="price-per">/ course</span></div>
-      <button class="c-btn c-btn-purple" onclick="openPay('Computational Architecture',12000)">Enroll now</button>
+      <div class="course-price"><span class="price-val">&#3647;11,990</span><span class="price-per">/ course</span></div>
+      <button class="c-btn c-btn-purple" onclick="openPay('Computational Architecture',11990)">Enroll now</button>
     </div>
   </div>
   <div style="text-align:center; margin-top:2.5rem" class="fade-in">
@@ -566,13 +566,13 @@ footer {
 
     <div class="pay-box">
       <div class="pay-box-label">Pay with PromptPay</div>
-      <div class="qr-wrap"><img src="image/qr-payment.jpeg" alt="PromptPay QR — MR. YUTTANA TONGKRAJANG"></div>
+      <div class="qr-wrap"><img id="ppQrImg" src="image/qr-4790.jpg" alt="PromptPay QR — MR. YUTTANA TONGKRAJANG"></div>
       <div class="pay-meta">
         <div><span>Account name</span><strong>MR. YUTTANA TONGKRAJANG</strong></div>
         <div><span>PromptPay ID</span><strong>064-028-0287</strong></div>
         <div class="pay-amt"><span>Amount</span><strong id="ppAmt"></strong></div>
       </div>
-      <div class="pay-hint">Scan with any Thai bank app and enter the amount above</div>
+      <div class="pay-hint">Scan with any Thai bank app &mdash; amount is pre-filled</div>
     </div>
 
     <div class="fg"><label>Full name</label><input type="text" placeholder="Your name" id="iName"></div>
@@ -852,6 +852,7 @@ function openPay(c, p) {
   const priceStr = '\u0E3F' + p.toLocaleString();
   document.getElementById('mPrice').textContent = priceStr;
   document.getElementById('ppAmt').textContent = priceStr;
+  document.getElementById('ppQrImg').src = 'image/qr-' + p + '.jpg';
   document.getElementById('payModal').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
