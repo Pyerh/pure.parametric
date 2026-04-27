@@ -275,6 +275,7 @@ section { padding: 5rem 2.5rem; }
   background: #fff; border: 1px solid var(--border);
   border-radius: 16px; padding: 2rem;
   transition: box-shadow 0.3s, transform 0.3s; position: relative;
+  display: flex; flex-direction: column;
 }
 .course-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.06); transform: translateY(-2px); }
 .course-card.featured { border: 2px solid #34a853; }
@@ -297,7 +298,7 @@ section { padding: 5rem 2.5rem; }
 .cl-purple { background: rgba(161,66,244,0.1); color: #a142f4; }
 .course-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem; }
 .course-card .desc { color: var(--text-mid); font-size: 0.88rem; margin-bottom: 1.25rem; }
-.feat-list { list-style: none; margin-bottom: 1.5rem; }
+.feat-list { list-style: none; margin-bottom: 1.5rem; flex-grow: 1; }
 .feat-list li {
   font-size: 0.82rem; color: var(--text-mid);
   padding: 0.35rem 0;
