@@ -482,6 +482,32 @@ body.has-promo .hero { padding-top: 9rem; }
   border-bottom: 1px solid var(--text);
   padding-bottom: 2px;
 }
+
+/* REVIEW MODAL EXTRAS */
+.rating-stars {
+  display: flex; gap: 0.35rem; font-size: 1.9rem;
+  color: var(--border-hover); cursor: pointer; user-select: none;
+  line-height: 1;
+}
+.rating-stars span { transition: color 0.15s; }
+.rating-stars span.active,
+.rating-stars span.hover-active { color: #f59e0b; }
+.fg textarea {
+  width: 100%; padding: 0.7rem 0.85rem;
+  background: var(--bg-soft); border: 1px solid var(--border);
+  border-radius: 10px; color: var(--text);
+  font-family: var(--font); font-size: 0.88rem;
+  outline: none; transition: border-color 0.2s;
+  resize: vertical; min-height: 100px;
+}
+.fg textarea:focus { border-color: var(--text); }
+.fg input[type="checkbox"] { width: auto; padding: 0; accent-color: var(--text); }
+.consent-row {
+  display: flex; align-items: flex-start; gap: 0.55rem;
+  font-size: 0.82rem; color: var(--text-mid);
+  margin-bottom: 1.25rem; line-height: 1.4;
+}
+.consent-row label { font-weight: 400; margin: 0; cursor: pointer; }
 .modal-close {
   position: absolute; top: 1rem; right: 1rem;
   background: var(--bg-soft); border: none;
@@ -753,6 +779,9 @@ footer {
       </div>
     </div>
   </div>
+  <div class="section-cta fade-in" style="margin-top: 2.5rem;">
+    <button onclick="openReview()" class="btn-outline" style="display:inline-flex; cursor:pointer;">Leave a review</button>
+  </div>
 </section>
 
 <!-- TUTORIALS / BLOG -->
@@ -847,6 +876,39 @@ footer {
     <a href="https://www.instagram.com/pure.parametric/" target="_blank">Instagram</a>
   </div>
 </footer>
+</div>
+
+<!-- REVIEW MODAL -->
+<div class="modal-overlay" id="reviewModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeReview()">&times;</button>
+    <h3>Share your experience</h3>
+    <p class="m-sub">Your review helps other students decide.</p>
+
+    <div class="fg">
+      <label>Your rating</label>
+      <div class="rating-stars" id="ratingStars">
+        <span data-val="1">&#9733;</span>
+        <span data-val="2">&#9733;</span>
+        <span data-val="3">&#9733;</span>
+        <span data-val="4">&#9733;</span>
+        <span data-val="5">&#9733;</span>
+      </div>
+    </div>
+
+    <div class="fg"><label>Your name</label><input type="text" id="rName" placeholder="Your name"></div>
+    <div class="fg"><label>Role / profession</label><input type="text" id="rRole" placeholder="e.g. Architecture student"></div>
+    <div class="fg"><label>Email (optional)</label><input type="email" id="rEmail" placeholder="for verification, not shown publicly"></div>
+    <div class="fg"><label>Your review</label><textarea id="rText" placeholder="What did you learn? What was the experience like?"></textarea></div>
+
+    <div class="consent-row">
+      <input type="checkbox" id="rConsent" checked>
+      <label for="rConsent">I'm happy for this review to be published on the site (your email is never shown).</label>
+    </div>
+
+    <button class="submit-btn" onclick="submitReview()">Send review</button>
+    <div class="sec-note">&#128274; Reviews are read and approved before publishing</div>
+  </div>
 </div>
 
 <!-- PAYMENT MODAL -->
@@ -1193,7 +1255,78 @@ async function submitPay() {
   }
 }
 document.getElementById('payModal').addEventListener('click', function(e) { if (e.target === this) closePay(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closePay(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closePay(); closeReview(); } });
+
+/* ======= REVIEW MODAL ======= */
+let rRating = 0;
+function openReview() {
+  document.getElementById('reviewModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeReview() {
+  document.getElementById('reviewModal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+(function setupStars() {
+  const stars = document.querySelectorAll('#ratingStars span');
+  stars.forEach(s => {
+    s.addEventListener('click', () => {
+      rRating = parseInt(s.dataset.val);
+      stars.forEach(x => x.classList.toggle('active', parseInt(x.dataset.val) <= rRating));
+    });
+    s.addEventListener('mouseover', () => {
+      const v = parseInt(s.dataset.val);
+      stars.forEach(x => x.classList.toggle('hover-active', parseInt(x.dataset.val) <= v));
+    });
+  });
+  document.getElementById('ratingStars').addEventListener('mouseleave', () => {
+    stars.forEach(x => x.classList.remove('hover-active'));
+  });
+})();
+async function submitReview() {
+  const name = document.getElementById('rName').value.trim();
+  const role = document.getElementById('rRole').value.trim();
+  const email = document.getElementById('rEmail').value.trim();
+  const text = document.getElementById('rText').value.trim();
+  const consent = document.getElementById('rConsent').checked;
+  if (!name || !text || rRating === 0) {
+    alert('Please add your name, a star rating, and your review.');
+    return;
+  }
+  const btn = document.querySelector('#reviewModal .submit-btn');
+  const original = btn.textContent;
+  btn.disabled = true; btn.textContent = 'Sending...';
+  try {
+    const res = await fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        type: 'review',
+        name: name,
+        role: role,
+        email: email,
+        rating: rRating + ' / 5',
+        review: text,
+        consent_to_publish: consent ? 'yes' : 'no'
+      })
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    alert('Thanks, ' + name + '!\n\nYour review has been received. I\'ll read it and add it to the site soon.');
+    document.getElementById('rName').value = '';
+    document.getElementById('rRole').value = '';
+    document.getElementById('rEmail').value = '';
+    document.getElementById('rText').value = '';
+    document.getElementById('rConsent').checked = true;
+    rRating = 0;
+    document.querySelectorAll('#ratingStars span').forEach(x => x.classList.remove('active'));
+    closeReview();
+  } catch (err) {
+    alert('Could not send: ' + err.message + '\n\nPlease send your review on WhatsApp instead.');
+  } finally {
+    btn.disabled = false; btn.textContent = original;
+  }
+}
+document.getElementById('reviewModal').addEventListener('click', function(e) { if (e.target === this) closeReview(); });
 </script>
 
 </body>
